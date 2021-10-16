@@ -1,14 +1,9 @@
- <!-- Footer -->
- <footer class="footer-container" style="background-color: #f35b3f; color: white;">
-		
-    <div class="container">
-        <div class="row">
-
-            <div class="col" >
-                &copy; TPQ - All Right Reserved.
-            </div>
-
+  <!-- Footer -->
+  <footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; TPQ 2021</span>
         </div>
     </div>
-
 </footer>
+<!-- End of Footer -->

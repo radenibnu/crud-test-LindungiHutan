@@ -19,63 +19,56 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'frontendCOntroller@index')->name('frontend');
-
-Route::get('/pembayaranSPP', 'pembayaranSPPController@create')->name('pembayaranSPP');
-Route::post('/pembayaranSPPStore', 'pembayaranSPPController@store')->name('pembayaranSPPStore');
-Route::get('/notifikasi', 'pembayaranSPPController@notifikasi')->name('pembayaranSPP.notifikasi');
-
-Route::get('/uploadBuktiTransfer', 'formController@create')->name('form.create');
-Route::post('/uploadStore', 'formController@store')->name('form.store');
-Route::get('/notifikasiUpload', 'formController@notifikasiUpload')->name('notifikasiUpload');
-
-
-
-Route::prefix('admin')->group(function () {
-
-    Route::get('/dashboard', 'dashboardController@index')->name('dashboard.index');
-
-    Route::prefix('pembayaranSPP')->group(function () {
-        Route::get('/', 'pembayaranSPPController@index')->name('pembayaranSPPController.index');
-        // Route::get('/create', 'pembayaranSPPController@create')->name('pembayaranSPPController.create');
-        // Route::post('/', 'pembayaranSPPController@store')->name('pembayaranSPPController.store');
-        Route::get('/edit/{id}', 'pembayaranSPPController@edit')->name('pembayaranSPPController.edit');
-        Route::put('/{id}', 'pembayaranSPPController@update')->name('pembayaranSPPController.update');
-        Route::put('/delete', 'pembayaranSPPController@delete')->name('pembayaranSPPController.delete');
-        Route::delete('/{id}', 'pembayaranSPPController@destroy')->name('pembayaranSPPController.destroy');
-        Route::get('/show/{id}', 'pembayaranSPPController@show')->name('pembayaranSPPController.show');
-    });
-
-    Route::prefix('form')->group(function () {
-        Route::get('/', 'formController@index')->name('form.index');
-        // Route::get('/create', 'formController@create')->name('form.create');
-        // Route::post('/', 'formController@store')->name('form.store');
-        Route::get('/edit/{id}', 'formController@edit')->name('form.edit');
-        Route::put('/{id}', 'formController@update')->name('form.update');
-        Route::put('/delete', 'formController@delete')->name('form.delete');
-        Route::delete('/{id}', 'formController@destroy')->name('form.destroy');
-        Route::get('/show/{id}', 'formController@show')->name('form.show');
-
-        // Route::get('/cetak_pdf/{id}', 'formController@cetakPDF')->name('form.cetak');
-        Route::get('/cetak_pdf', 'formController@cetakPDF')->name('form.cetak');
-    });
-
-    Route::prefix('manageAccount')->group(function () {
-        Route::get('/', 'manageAccountController@index')->name('manageAccount.index');
-        Route::get('/create', 'manageAccountController@create')->name('manageAccount.create');
-        Route::post('/', 'manageAccountController@store')->name('manageAccount.store');
-        // Route::get('/edit/{id}', 'manageAccountController@edit')->name('manageAccount.edit');
-        // Route::put('/{id}', 'manageAccountController@update')->name('manageAccount.update');
-        // Route::put('/delete', 'manageAccountController@delete')->name('manageAccount.delete');
-        Route::delete('/{id}', 'manageAccountController@destroy')->name('manageAccount.destroy');
-        // Route::get('/show/{id}', 'manageAccountController@show')->name('manageAccount.show');
-    });
-
-    Route::prefix('profile')->group(function () {
-        Route::get('/', 'profileController@index')->name('profile.index');
-        Route::put('/{id}', 'profileController@update')->name('profile.update');
-    });
-
     
+Route::prefix('artis')->group(function () {
+    Route::get('/', 'artisController@index')->name('artis.index');
+    Route::get('/create', 'artisController@create')->name('artis.create');
+    Route::post('/', 'artisController@store')->name('artis.store');
+    Route::get('/edit/{id}', 'artisController@edit')->name('artis.edit');
+    Route::put('/{id}', 'artisController@update')->name('artis.update');
+    Route::put('/delete', 'artisController@delete')->name('artis.delete');
+    Route::delete('/{id}', 'artisController@destroy')->name('artis.destroy');
+    Route::get('/show/{id}', 'artisController@show')->name('artis.show');
 });
+Route::prefix('film')->group(function () {
+    Route::get('/', 'filmController@index')->name('film.index');
+    Route::get('/create', 'filmController@create')->name('film.create');
+    Route::post('/', 'filmController@store')->name('film.store');
+    Route::get('/edit/{id}', 'filmController@edit')->name('film.edit');
+    Route::put('/{id}', 'filmController@update')->name('film.update');
+    Route::put('/delete', 'filmController@delete')->name('film.delete');
+    Route::delete('/{id}', 'filmController@destroy')->name('film.destroy');
+    Route::get('/show/{id}', 'filmController@show')->name('film.show');
+});
+Route::prefix('genre')->group(function () {
+    Route::get('/', 'genreController@index')->name('genre.index');
+    Route::get('/create', 'genreController@create')->name('genre.create');
+    Route::post('/', 'genreController@store')->name('genre.store');
+    Route::get('/edit/{id}', 'genreController@edit')->name('genre.edit');
+    Route::put('/{id}', 'genreController@update')->name('genre.update');
+    Route::put('/delete', 'genreController@delete')->name('genre.delete');
+    Route::delete('/{id}', 'genreController@destroy')->name('genre.destroy');
+    Route::get('/show/{id}', 'genreController@show')->name('genre.show');
+});
+Route::prefix('negara')->group(function () {
+    Route::get('/', 'negaraController@index')->name('negara.index');
+    Route::get('/create', 'negaraController@create')->name('negara.create');
+    Route::post('/', 'negaraController@store')->name('negara.store');
+    Route::get('/edit/{id}', 'negaraController@edit')->name('negara.edit');
+    Route::put('/{id}', 'negaraController@update')->name('negara.update');
+    Route::put('/delete', 'negaraController@delete')->name('negara.delete');
+    Route::delete('/{id}', 'negaraController@destroy')->name('negara.destroy');
+    Route::get('/show/{id}', 'negaraController@show')->name('negara.show');
+});
+Route::prefix('produser')->group(function () {
+    Route::get('/', 'produserController@index')->name('produser.index');
+    Route::get('/create', 'produserController@create')->name('produser.create');
+    Route::post('/', 'produserController@store')->name('produser.store');
+    Route::get('/edit/{id}', 'produserController@edit')->name('produser.edit');
+    Route::put('/{id}', 'produserController@update')->name('produser.update');
+    Route::put('/delete', 'produserController@delete')->name('produser.delete');
+    Route::delete('/{id}', 'produserController@destroy')->name('produser.destroy');
+    Route::get('/show/{id}', 'produserController@show')->name('produser.show');
+});
+

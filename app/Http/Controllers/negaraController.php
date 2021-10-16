@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\models\negara;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class frontendController extends Controller
+
+class negaraController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +16,10 @@ class frontendController extends Controller
      */
     public function index()
     {
-        return view('pages.frontend.frontend');
+        $negaras = negara::all();
+        return view('pages.frontend.negara.index')->with([
+            'negaras' => $negaras
+        ]);
     }
 
     /**
@@ -23,7 +29,7 @@ class frontendController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.frontend.negara.create');
     }
 
     /**
@@ -34,7 +40,22 @@ class frontendController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kd_negara' => 'required|string',
+            'nm_negara' => 'required|string',
+        ]);
+
+        if($validator->fails()){
+            return redirect()
+                ->route('negara.create')
+                ->withErrors($validator)
+                ->withInput();
+        }else{
+            $datanegara = $request->all();
+
+            negara::create($datanegara);
+            return redirect()->route('negara.index')->with('success', 'Data berhasil ditambahkan');
+        }
     }
 
     /**
@@ -56,7 +77,10 @@ class frontendController extends Controller
      */
     public function edit($id)
     {
-        //
+        $negara = negara::findorfail($id);
+        return view('pages.frontend.negara.edit')->with([
+            'negara' => $negara
+        ]);
     }
 
     /**
@@ -68,7 +92,12 @@ class frontendController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $newdata = $request->all();
+
+        $datanegara = negara::findorfail($id);
+        $datanegara->update($newdata);
+
+        return redirect()->route('negara.index')->with('success', 'Data berhasil dirubah');
     }
 
     /**
@@ -79,6 +108,9 @@ class frontendController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $datanegara = negara::findorfail($id);
+        $datanegara->delete();
+        return redirect()->route('negara.index')->with(
+        'success', 'Data Berhasil dihapus');
     }
 }
